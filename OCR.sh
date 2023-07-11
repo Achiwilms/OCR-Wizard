@@ -24,10 +24,10 @@ for file_ori in "$path_ori"/*; do
         file_ocr=$(basename "$file_ori")
 
         # enter language
-        echo "--------------------------"
+        echo "-----------------------------------"
         echo "For ""$file_ocr"
         read -p "Enter your choice (1-3): " option
-        echo "--------------------------"
+        echo "-----------------------------------"
         
         # Add the option to the array
         lng_array+=("$option")
