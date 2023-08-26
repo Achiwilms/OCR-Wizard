@@ -23,11 +23,11 @@ cd /path/to/directory/
 ```bash
 chmod +x OCR.sh
 ```
-4. Run `OCR.sh`
+5. Run `OCR.sh`
 ```bash
 ./OCR.sh
 ```
-5. An user interface should appear. 
+6. An user interface should appear. 
 ```bash
 Options:
 1. English
@@ -37,8 +37,8 @@ Options:
 For Wei Chuan Dragons.pdf
 Enter your choice (1-3):
 ```
-6. Enter the language for each PDF file.  
-7. You can find the OCR-ed PDF file in the folder `pdf_OCR`. 
+7. Enter the language for each PDF file.  
+8. You can find the OCR-ed PDF file in the folder `pdf_OCR`. 
 
 
 ## Contributing
