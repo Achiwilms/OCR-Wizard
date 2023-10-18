@@ -1,74 +1,64 @@
+import os
 import sys
+import ocrmypdf
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QCheckBox, QPushButton, QFileDialog
 
 class LanguageSelector(QWidget):
     def __init__(self):
-        super().__init__()
-        self.init_ui()        
-        self.languages = ["English", "Spanish", "French", "German"]
-        self.languages_code = ["English", "Spanish", "French", "German"]
-
-    def init_ui(self):
+        super().__init__()    
         self.setWindowTitle('OCR Wizard')
         self.setGeometry(100, 100, 1000, 600)
+        self.languages = ["English", "Traditional Chinese", "Simplified Chinese", "German", "Japanese"]
+        self.languages_name = ["English", "繁體中文", "简体中文", "Deutsch", "日本語"]
+        self.languages_code = ["eng", "chi_tra", "chi_sim", "deu", "jpn"]
 
         # Create checkboxes for different languages
-        self.english_checkbox = QCheckBox('English', self)
-        self.spanish_checkbox = QCheckBox('Spanish', self)
-        self.french_checkbox = QCheckBox('French', self)
-        self.german_checkbox = QCheckBox('German', self)
+        self.language_checkboxes = []
+        for language_name in self.languages_name:
+            checkbox = QCheckBox(language_name, self)
+            self.language_checkboxes.append(checkbox)
 
-        # Create a button to select a file
+        # Create a button to select a file and Start OCR
         self.file_button = QPushButton('Select File', self)
         self.ocr_button = QPushButton('Start OCR', self)
 
-        # Create a layout to add checkboxes and the button
+        # Create a layout to add checkboxes and the buttons
         layout = QVBoxLayout()
-        layout.addWidget(self.english_checkbox)
-        layout.addWidget(self.spanish_checkbox)
-        layout.addWidget(self.french_checkbox)
-        layout.addWidget(self.german_checkbox)
+
+        # Add the checkboxes to the layout
+        for checkbox in self.language_checkboxes:
+            layout.addWidget(checkbox)    
         layout.addWidget(self.file_button)
         layout.addWidget(self.ocr_button)
 
         # Set the layout for the main window
         self.setLayout(layout)
 
-        # Connect the checkboxes and the button to their respective functions
-        self.english_checkbox.stateChanged.connect(self.language_selected)
-        self.spanish_checkbox.stateChanged.connect(self.language_selected)
-        self.french_checkbox.stateChanged.connect(self.language_selected)
-        self.german_checkbox.stateChanged.connect(self.language_selected)
+        # Connect the buttons to their respective functions
         self.file_button.clicked.connect(self.select_file)
         self.ocr_button.clicked.connect(self.start_ocr)
 
     def language_selected(self):
         self.selected_languages = []
-
-        if self.english_checkbox.isChecked():
-            self.selected_languages.append('English')
-        if self.spanish_checkbox.isChecked():
-            self.selected_languages.append('Spanish')
-        if self.french_checkbox.isChecked():
-            self.selected_languages.append('French')
-        if self.german_checkbox.isChecked():
-            self.selected_languages.append('German')
-
-        print(f'Selected languages: {", ".join(self.selected_languages)}')
+        for idx, checkbox in enumerate(self.language_checkboxes):
+            if checkbox.isChecked():
+                self.selected_languages.append(self.languages_code[idx])
+        return        
 
     def select_file(self):
+        self.file_paths = []
         options = QFileDialog.Options()
-        file_paths, _ = QFileDialog.getOpenFileNames(self, "Select File", "", "All Files (*)", options=options)
-        
-        if file_paths:
-            for file_path in file_paths:
-                print(f'Selected file: {file_path}')
-        else: 
-            print("No files selected.")
+        self.file_paths, _ = QFileDialog.getOpenFileNames(self, "Select File", "", "All Files (*)", options=options)
+        return 
 
     def start_ocr(self):
-        print("start ocr")
-        print(f'Selected languages: {", ".join(self.selected_languages)}')
+        self.language_selected()
+        print(self.selected_languages)
+        if self.file_paths:
+            for file_path in self.file_paths:
+                dir, filename = os.path.split(file_path)
+                output_path = os.path.join(dir, f"OCR_{filename}")
+                ocrmypdf.ocr(file_path, output_path, language=self.selected_languages)
         return
 
 if __name__ == '__main__':
@@ -76,3 +66,4 @@ if __name__ == '__main__':
     window = LanguageSelector()
     window.show()
     sys.exit(app.exec_())
+
