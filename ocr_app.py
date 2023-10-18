@@ -48,17 +48,23 @@ class LanguageSelector(QWidget):
     def select_file(self):
         self.file_paths = []
         options = QFileDialog.Options()
-        self.file_paths, _ = QFileDialog.getOpenFileNames(self, "Select File", "", "All Files (*)", options=options)
+        all_file_paths, _ = QFileDialog.getOpenFileNames(self, "Select File", "", "All Files (*)", options=options)
+        for file_path in all_file_paths:
+            if file_path.endswith(".pdf"):
+                self.file_paths.append(file_path)
         return 
 
     def start_ocr(self):
         self.language_selected()
-        print(self.selected_languages)
         if self.file_paths:
             for file_path in self.file_paths:
                 dir, filename = os.path.split(file_path)
                 output_path = os.path.join(dir, f"OCR_{filename}")
                 ocrmypdf.ocr(file_path, output_path, language=self.selected_languages)
+            # clear file paths
+            self.file_paths = []
+            # complete message
+            print(f"OCR completed for {len(self.file_paths)} files.")
         return
 
 if __name__ == '__main__':
