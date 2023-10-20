@@ -8,9 +8,9 @@ class LanguageSelector(QWidget):
         self.FileSelector = FileSelector
         self.setWindowTitle('OCR Wizard')
         self.setGeometry(100, 100, 1000, 600)
-        self.languages = ["English", "Traditional Chinese", "Simplified Chinese", "German", "Japanese"]
-        self.languages_name = ["English", "繁體中文", "简体中文", "Deutsch", "日本語"]
-        self.languages_code = ["eng", "chi_tra", "chi_sim", "deu", "jpn"]
+        self.languages = ["English", "Traditional Chinese", "Simplified Chinese", "Japanese", "German", "Spanish"]
+        self.languages_name = ["English", "繁體中文", "简体中文", "日本語", "Deutsch", "Español"]
+        self.languages_code = ["eng", "chi_tra", "chi_sim", "jpn", "deu", "spa"]
 
         # Create checkboxes for different languages
         self.language_checkboxes = []
