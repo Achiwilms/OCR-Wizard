@@ -1,3 +1,6 @@
+# omit program folder
+OCR_Wizard/*
+
 # omit pdf files
 *.pdf
 
