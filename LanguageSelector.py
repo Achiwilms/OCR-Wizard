@@ -1,10 +1,11 @@
-import os
 import sys
-import ocrmypdf
-from PyQt5.QtWidgets import QApplication, QWidget,QVBoxLayout, QCheckBox, QPushButton 
+from PyQt5.QtWidgets import QApplication, QWidget,QVBoxLayout, QCheckBox, QPushButton, QLabel
+from OCRer import OCRer
+
 class LanguageSelector(QWidget):
-    def __init__(self):
+    def __init__(self, FileSelector=None):
         super().__init__()    
+        self.FileSelector = FileSelector
         self.setWindowTitle('OCR Wizard')
         self.setGeometry(100, 100, 1000, 600)
         self.languages = ["English", "Traditional Chinese", "Simplified Chinese", "German", "Japanese"]
@@ -16,6 +17,9 @@ class LanguageSelector(QWidget):
         for language_name in self.languages_name:
             checkbox = QCheckBox(language_name, self)
             self.language_checkboxes.append(checkbox)
+        
+        # Create a label for instructions
+        self.word_label = QLabel('Please select the languages in the document', self)
 
         # Create a button to select a file and Start OCR
         self.ocr_button = QPushButton('Start OCR', self)
@@ -24,8 +28,9 @@ class LanguageSelector(QWidget):
         layout = QVBoxLayout()
 
         # Add the checkboxes to the layout
+        layout.addWidget(self.word_label)
         for checkbox in self.language_checkboxes:
-            layout.addWidget(checkbox)    
+            layout.addWidget(checkbox)   
         layout.addWidget(self.ocr_button)
 
         # Set the layout for the main window
@@ -42,16 +47,20 @@ class LanguageSelector(QWidget):
         return        
 
     def start_ocr(self):
+        # check the selected languages
         self.language_selected()
-        if self.file_paths:
-            for file_path in self.file_paths:
-                dir, filename = os.path.split(file_path)
-                output_path = os.path.join(dir, f"OCR_{filename}")
-                ocrmypdf.ocr(file_path, output_path, language=self.selected_languages)
-            # clear file paths
-            self.file_paths = []
-            # complete message
-            print(f"OCR completed for {len(self.file_paths)} files.")
+
+        # check if at least one language is selected
+        if len(self.selected_languages) == 0:
+            self.word_label.setText("[ERROR] Please select at least one language.")
+            return
+        
+        # close this window
+        self.close()
+
+        # Open the language selector window and pass a reference to self
+        self.progress_window = OCRer(self)
+        self.progress_window.show()
         return
 
 if __name__ == '__main__':
