@@ -1,7 +1,7 @@
 import os
 import sys
 import ocrmypdf
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QCheckBox, QPushButton, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel,QVBoxLayout, QCheckBox, QPushButton, QFileDialog
 
 class LanguageSelector(QWidget):
     def __init__(self):
@@ -66,6 +66,15 @@ class LanguageSelector(QWidget):
             # complete message
             print(f"OCR completed for {len(self.file_paths)} files.")
         return
+
+class OCRProgressWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('OCR Progress')
+        self.setGeometry(100, 100, 500, 200)
+        self.progress_label = QLabel('OCR in progress...', self)
+        self.setLayout(QVBoxLayout())
+        self.layout().addWidget(self.progress_label)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
