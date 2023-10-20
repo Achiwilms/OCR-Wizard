@@ -15,7 +15,7 @@ class Wizard(QWidget):
         self.setGeometry(100, 100, 1000, 600)
 
         # Create a button to select file
-        self.word_label = QLabel('OCR in progress', self)
+        self.word_label = QLabel('', self)
         self.close_button = QPushButton('Close', self)
 
         # Create a layout to add checkboxes and the buttons
