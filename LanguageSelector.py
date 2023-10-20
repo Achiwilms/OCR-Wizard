@@ -52,14 +52,17 @@ class LanguageSelector(QWidget):
 
         # check if at least one language is selected
         if len(self.selected_languages) == 0:
+            # error message
             self.word_label.setText("[ERROR] Please select at least one language.")
+            # change the font type
+            self.word_label.setStyleSheet("font-size: 36px; color: red;")
             return
         
         # close this window
         self.close()
 
         # Open the language selector window and pass a reference to self
-        self.progress_window = Wizard(self)
+        self.progress_window = Wizard(self, self.FileSelector)
         self.progress_window.show()
         return
 

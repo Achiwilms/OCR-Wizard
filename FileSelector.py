@@ -21,12 +21,6 @@ class FileSelector(QWidget):
         # Add the button to the layout
         layout.addWidget(self.word_label)
         layout.addWidget(self.file_button)
- 
-        # Change the font type
-        font = self.word_label.font()
-        font.setFamily("Arial")  # Replace with your desired font family
-        font.setPointSize(12)    # Set font size      
-        self.word_label.setFont(font)
 
         # Set the layout for the main window
         self.setLayout(layout)
@@ -45,7 +39,10 @@ class FileSelector(QWidget):
 
         # check if at least one file is selected
         if len(self.file_paths) == 0:
+            # error message
             self.word_label.setText("[ERROR] Please select at least one PDF file.")
+            # change the font type
+            self.word_label.setStyleSheet("font-size: 36px; color: red;")
             return
 
         # close this window
