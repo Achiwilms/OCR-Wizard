@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget,QVBoxLayout, QCheckBox, QPushButton, QLabel
-from OCRer import OCRer
+from Wizard import Wizard
 
 class LanguageSelector(QWidget):
     def __init__(self, FileSelector=None):
@@ -59,7 +59,7 @@ class LanguageSelector(QWidget):
         self.close()
 
         # Open the language selector window and pass a reference to self
-        self.progress_window = OCRer(self)
+        self.progress_window = Wizard(self)
         self.progress_window.show()
         return
 

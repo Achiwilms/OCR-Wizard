@@ -45,7 +45,7 @@ class FileSelector(QWidget):
 
         # check if at least one file is selected
         if len(self.file_paths) == 0:
-            self.word_label.setText("[ERROR] Please select at least one file.")
+            self.word_label.setText("[ERROR] Please select at least one PDF file.")
             return
 
         # close this window
