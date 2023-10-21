@@ -18,7 +18,7 @@ class Wizard(QWidget):
         # Create a button to select file
         self.word_label = QLabel('', self)
         self.close_button = QPushButton('Close', self)
-        self.restart_button = QPushButton('OCR other files', self)
+        self.restart_button = QPushButton('Continue OCR', self)
 
         # Create a layout to add checkboxes and the buttons
         layout = QVBoxLayout()

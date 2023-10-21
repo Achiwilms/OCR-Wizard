@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication
-from FileSelector import FileSelector
+from src.FileSelector import FileSelector
 
 def main():
     app = QApplication(sys.argv)

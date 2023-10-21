@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget,QVBoxLayout, QCheckBox, QPushButton, QLabel
-from Wizard import Wizard
+from src.Wizard import Wizard
 
 class LanguageSelector(QWidget):
     def __init__(self, FileSelector=None):

@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QFileDialog, QPushButton, QApplication
-from LanguageSelector import LanguageSelector
+from src.LanguageSelector import LanguageSelector
 
 class FileSelector(QWidget):
     def __init__(self):
