@@ -40,29 +40,27 @@ class LanguageSelector(QWidget):
         self.ocr_button.clicked.connect(self.start_ocr)
 
     def language_selected(self):
-        self.selected_languages = []
-        for idx, checkbox in enumerate(self.language_checkboxes):
-            if checkbox.isChecked():
-                self.selected_languages.append(self.languages_code[idx])
-        return        
+        # get the selected languages
+        self.selected_languages = [self.languages_code[idx] for idx, checkbox in enumerate(self.language_checkboxes) if checkbox.isChecked()]
 
     def start_ocr(self):
-        # check the selected languages
+        # Call the language_selected method to update the selected_languages attribute
         self.language_selected()
 
-        # check if at least one language is selected
-        if len(self.selected_languages) == 0:
-            # error message
+        # Check if no languages are selected
+        if not self.selected_languages:
+            # Display an error message in the word_label widget
             self.word_label.setText("[ERROR] Please select at least one language.")
-            # change the font type
             self.word_label.setStyleSheet("font-size: 36px; color: red;")
             return
-        
-        # close this window
+
+        # Close the current window
         self.close()
 
-        # Open the language selector window and pass a reference to self
+        # Create an instance of the Wizard class, passing in the current instance and the FileSelector attribute
         self.progress_window = Wizard(self, self.FileSelector)
+        
+        # Show the progress window
         self.progress_window.show()
         return
 

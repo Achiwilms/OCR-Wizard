@@ -29,29 +29,30 @@ class FileSelector(QWidget):
         self.file_button.clicked.connect(self.select_file)
 
     def select_file(self):
-        self.file_paths = []
+        # Set options for the file dialog
         options = QFileDialog.Options()
-        all_file_paths, _ = QFileDialog.getOpenFileNames(self, "Select File", "", "All Files (*)", options=options)
-        for file_path in all_file_paths:
-            if file_path.endswith(".pdf"):
-                self.file_paths.append(file_path)
-                # print(f"Selected file: {file_path.split('/')[-1]}")
 
-        # check if at least one file is selected
+        # Open the file dialog and get the selected file paths
+        all_file_paths, _ = QFileDialog.getOpenFileNames(
+            self, "Select File", "", "All Files (*)", options=options)
+
+        # Filter the file paths to only include PDF files
+        self.file_paths = [file_path for file_path in all_file_paths if file_path.endswith(".pdf")]
+
+        # Check if at least one file is selected
         if len(self.file_paths) == 0:
-            # error message
+            # Display an error message if no PDF files are selected
             self.word_label.setText("[ERROR] Please select at least one PDF file.")
-            # change the font type
             self.word_label.setStyleSheet("font-size: 36px; color: red;")
             return
 
-        # close this window
+        # Close the current window
         self.close()
 
-        # Open the language selector window and pass a reference to self
+        # Create and show the progress window
         self.progress_window = LanguageSelector(self)
         self.progress_window.show()
-        return 
+        return
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
