@@ -49,7 +49,7 @@ Select the languages in the document.
 #### Step4. Start OCR
 Press the "Start OCR" button and the OCR process will begin. You can monitor the progress in the termial.
 <p align="center">
-    <img src="images/termial.png" alt="GUI" width="400">
+    <img src="images/termial.png" alt="GUI" width="600">
 </p>
 
 #### Step5. Continue or Exit 
