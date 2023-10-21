@@ -1,11 +1,11 @@
-# OCR Wizard
+# OCR-Wizard
 
 A powerful and user-friendly tool based on [OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF), offering a seamless graphical user interface for effortless conversion of image-based PDFs into searchable  text.
 
 ## Environment 
 #### Step1. Install OCRmyPDF and tesseract languages
 
-For Debian, Ubuntu users, you can simply enter the following commands
+For Debian, Ubuntu users, you can simply use the following commands
 ```bash
 # Install OCRmyPDF
 sudo apt install ocrmypdf
@@ -33,14 +33,14 @@ python3 main.py
 An graphical user interface should appear. 
 
 
-#### Step2. Select the PDF file 
+#### Step2. Select the PDF File 
 <p align="center">
     <img src="images/fileselection.png" alt="GUI" width="400">
 </p>
 
 Press the "Select File" button and select the file you want to OCR. (it can be one or more files)
 
-#### Step3. Select the languages
+#### Step3. Select the Languages
 <p align="center">
     <img src="images/langselection.png" alt="GUI" width="400">
 </p>

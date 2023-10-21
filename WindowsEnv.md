@@ -32,7 +32,7 @@ python -m pip install ocrmypdf
  - `deu.traineddata`
  - `spa.traineddata` 
  
- from https://github.com/tesseract-ocr/tessdata/ and place it in C:\\Program Files\\Tesseract-OCR\\tessdata (or wherever Tesseract OCR is installed).
+ from https://github.com/tesseract-ocr/tessdata/ and place it in `C:\\Program Files\\Tesseract-OCR\\tessdata` (or wherever Tesseract OCR is installed).
 
  ---
  That's it. You have successfully setup OCRmyPdf on Windows!
