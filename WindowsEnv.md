@@ -12,9 +12,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 #### Step2. Download Required Packages Using Chocolatey
 ```bash
 choco install --pre tesseract
+```
 
+```bash
 choco install ghostscript
-
+```
+```bash
 choco install pngquant
 ```
 
