@@ -8,13 +8,19 @@ class LanguageSelector(QWidget):
         self.FileSelector = FileSelector
         self.setWindowTitle('OCR Wizard')
         self.setGeometry(100, 100, 1000, 600)
-        self.languages = ["English", "Traditional Chinese", "Simplified Chinese", "Japanese", "German", "Spanish"]
-        self.languages_name = ["English", "繁體中文", "简体中文", "日本語", "Deutsch", "Español"]
-        self.languages_code = ["eng", "chi_tra", "chi_sim", "jpn", "deu", "spa"]
+        # ('name of language', 'language code in tesseract')
+        self.languages = [
+            ("English", "eng"),
+            ("繁體中文", "chi_tra"),
+            ("简体中文", "chi_sim"),
+            ("日本語", "jpn"),
+            ("Deutsch", "deu"),
+            ("Español", "spa")
+        ]
 
         # Create checkboxes for different languages
         self.language_checkboxes = []
-        for language_name in self.languages_name:
+        for language_name, _ in self.languages:
             checkbox = QCheckBox(language_name, self)
             self.language_checkboxes.append(checkbox)
         
@@ -41,7 +47,8 @@ class LanguageSelector(QWidget):
 
     def language_selected(self):
         # get the selected languages
-        self.selected_languages = [self.languages_code[idx] for idx, checkbox in enumerate(self.language_checkboxes) if checkbox.isChecked()]
+        self.selected_languages = [self.languages[idx][1] for idx, checkbox in enumerate(self.language_checkboxes) if checkbox.isChecked()]
+        print(self.selected_languages)
 
     def start_ocr(self):
         # Call the language_selected method to update the selected_languages attribute
