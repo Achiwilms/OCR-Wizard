@@ -47,7 +47,7 @@ class Wizard(QWidget):
             dir, filename = os.path.split(file_path)
             output_path = os.path.join(dir, f"OCR_{filename}")
             print("🦊"*20+f"\nᕦ(･ㅂ･)ᕤ Working on {filename}\n"+"🦊"*20)
-            ocrmypdf.ocr(file_path, output_path, language=self.LanguageSelector.selected_languages)
+            ocrmypdf.ocr(file_path, output_path, language=self.LanguageSelector.selected_languages, force_ocr=True)
 
         # complete message
         # print(f"OCR completed for {len(self.LanguageSelector.FileSelector.file_paths)} files.") 
